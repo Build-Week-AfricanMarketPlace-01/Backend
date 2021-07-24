@@ -10,6 +10,25 @@ function getAll() {
     )
 }
 
+function findBy(filter) {
+    return db('items')
+        .where(filter)
+        .orderBy('item_id')
+}
+
+function findById(item_id) {
+    return db('items')
+        .leftJoin('user_items', 'items.item_id', 'userItems.item_id')
+        .leftJoin('users', 'user_items', 'users.user_id')
+        .select(
+            'item.*',
+            'users.user_id as item_owner_id',
+            'user.username as item_owner'
+        )
+        .where('item.item_id', item_id).first()
+}
+
 module.exports = {
-    getAll
+    getAll,
+    findBy,
 }
