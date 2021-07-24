@@ -1,8 +1,13 @@
 const router = require('express').Router()
+const Item = require('./items-model')
 
 // [GET] all items
 router.get('/', (req, res, next) => {
-    res.json({message: 'all items please'})
+    Item.getAll()
+    .then(items => {
+        res.json(items)
+    })
+    .catch(next)
 })
 
 // [GET] a certain item
