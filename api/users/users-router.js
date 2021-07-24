@@ -6,7 +6,7 @@ router.get('/', (req, res, next) => {
 })
 
 // [GET] a certain user
-router.get('/user_id', (req, res, next) => {
+router.get('/:user_id', (req, res, next) => {
     res.json({message: 'get by id'})
 })
 
@@ -19,6 +19,17 @@ router.post('/register', (req, res, next) => {
 router.post('/login', (req, res, next) => {
     res.json({message: 'log in user'})
 })
+
+// [PUT] edit a user
+router.put('/:user_id', (req, res, next) => {
+    res.json({message: 'edit a user'})
+})
+
+// [DELETE] a user
+router.delete('/:user_id', (req, res, next) => {
+    res.json({message: 'remove a user'})
+})
+
 // ERROR HANDLING 
 router.use((err, req, res, next) => { // eslint-disable-line
     res.status(err.status || 500).json({
