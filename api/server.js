@@ -5,6 +5,7 @@ const knex = require('knex')
 const db = require('./data/db-config')
 
 const UsersRouter = require('./users/users-router')
+const ItemsRouter =require('./items/items-router')
 
 // function getAllUsers() { return db('users') }
 
@@ -22,6 +23,7 @@ server.use(helmet())
 server.use(cors())
 
 server.use('/api/users', UsersRouter)
+server.use('/api/items', ItemsRouter)
 
 server.get("/", (req, res) => {
   res.status(200).json({ api: "up" })
