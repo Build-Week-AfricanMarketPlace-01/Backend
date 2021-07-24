@@ -1,6 +1,5 @@
 require('dotenv').config()
 /*
-
   PORT=5000
   NODE_ENV=development
   DEV_DATABASE_URL='postgresql://postgres:password@localhost:5432/database_name'
