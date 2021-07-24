@@ -33,7 +33,6 @@ router.delete('/:user_id', (req, res, next) => {
 // ERROR HANDLING 
 router.use((err, req, res, next) => { // eslint-disable-line
     res.status(err.status || 500).json({
-        contact_connie: `She's got the bug spray`,
         message: err.message,
         stack: err.stack,
     })
