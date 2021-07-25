@@ -1,4 +1,7 @@
 const router = require('express').Router()
+const Accounts = require("../users/users-model");
+const {checkParamsExist} = require("../users/users-middleware")
+const bcrypt = require("bcryptjs")
 
 // [GET] all users
 router.get('/', (req, res, next) => {

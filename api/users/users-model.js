@@ -1,39 +1,47 @@
 const db = require('../data/seeds/db-config.js');
-const utils = require('../data/seeds/utils');
 
-const findAll = async () => {
-    const users = await db('users');
-    return users.map( user => utils.userToBody( user ) );
-};
+// function getAccount(user_id) { //get all
+//     return db('users')
+//         .select("user_id", "username", "email")
+//         .where({ user_id })
+//         .first()
+// }
 
-const findById = async (users_id) => {
-    const user = await db('users').where({ user_id }).first().select('*');
-    return utils.userToBody( user );
-};
+// function getAccountItems(user_id) { // get a certain user
+//     return db("items as i")
+//         .select("i.item_id", "i.item_name", "i.category", "i.item_description", "i.price", "u.username as renter")
+//         .leftJoin("requests as r", "r.item_id", "i.item_id")
+//         .leftJoin("users as u", "r.renter_id", "u.user_id")
+//         .distinctOn("i.item_id")
+//         .where("i.owner_id", user_id)
+// }
 
-const create = async (user) => {
-    console.log(user);
-    return db('users')
-    .insert(user)
-    .then(([user_id]) => findById(user_id));
-};
+// function getAccountRequests(user_id) { // 
+//     return db("requests as r")
+//         .select("r.request_id", "i.item_name", "u.username as owner", "r.status")
+//         .leftJoin("items as i", "r.item_id", "i.item_id")
+//         .leftJoin("users as u", "i.owner_id", "u.user_id")
+//         .where("r.renter_id", user_id)
+// }
 
-const update = (user_id, changes) => {
-    return db('users')
-    .where({ user_id })
-    .first()
-    .update(changes)
-    .then(count => (count > 0 ? findById(user_id) : null));
-};
+// function getMyAccountRequests(user_id) { //
+//     return db("requests as r")
+//         .select("r.request_id", "i.item_name", "u.username as requester", "r.status")
+//         .leftJoin("items as i", "r.item_id", "i.item_id")
+//         .leftJoin("users as u", "r.renter_id", "u.user_id")
+//         .where("i.owner_id", user_id)
+// }
 
-const remove = async (user_id) => {
-    return await db('users').where({ user_id }).del();
-};
+// function update(user_id, user) { // edit
+//     return db("users")
+//         .update(user)
+//         .where({user_id})
+// }
 
-module.exports = {
-    findAll,
-    findById,
-    create,
-    update,
-    remove,
-}
+// module.exports = {
+//     getAccount,
+//     getAccountItems,
+//     getAccountRequests,
+//     getMyAccountRequests,
+//     update
+// }
