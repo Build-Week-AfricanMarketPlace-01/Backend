@@ -9,4 +9,4 @@ function checkParamsExist(req, res, next){
       : next({ status: 400, message: 'username or password required'})
 }
 
-module.exports = {checkParamsExist} //tests
+module.exports = {checkParamsExist} //test
