@@ -1,4 +1,4 @@
-const db = require('../data/seeds/db-config.js');
+const db = require('../data/db-config')
 
 // function getAccount(user_id) { //get all
 //     return db('users')
