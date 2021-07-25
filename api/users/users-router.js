@@ -1,6 +1,7 @@
 const router = require('express').Router()
 const Users = require('../users/users-model');
 const {checkParamsExist} = require("../users/users-middleware")
+
 const bcrypt = require("bcryptjs");
 const { tokenBuilder, restricted } = require('../../middleware/auth');
 
