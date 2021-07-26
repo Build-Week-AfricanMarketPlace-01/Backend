@@ -22,7 +22,7 @@ router.get('/:item_id', checkId, (req, res, next) => {
 })
 
 // [POST] add a new item
-router.post('/user/:item_id', (req, res, next) => {
+router.post('/user/:user_id', (req, res, next) => {
     Item.addItem(req.body, req.params)
     .then(item => {
         res.status(201).json(item)

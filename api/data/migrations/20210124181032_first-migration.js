@@ -15,7 +15,7 @@ exports.up = async (knex) => {
     })
 
     .createTable('user_items', table => {
-      table.increments('user-items_id')
+      table.increments('user_items_id')
       table.integer('item_id')
         .unsigned()
         .notNullable()

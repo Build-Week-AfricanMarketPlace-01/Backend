@@ -7,7 +7,11 @@ const { tokenBuilder, restricted } = require('../../middleware/auth');
 
 // [GET] all users
 router.get('/', restricted,(req, res, next) => {
-    res.json({message: 'get all'})
+    Users.findAll()
+    .then(users => {
+        res.json(users)
+    })
+    .catch(next)
 })
 
 // [GET] a certain user
@@ -17,11 +21,11 @@ router.get('/:user_id', restricted, (req, res, next) => {
 
 // [POST] registers a new user
 router.post('/register', (req, res, next) => {
-    const {username, password, description, price} = req.body
+    const {username, password,} = req.body
     const trimUser = username.trim()
     const hash = bcrypt.hashSync(password, 8)
 
-    Users.addUser({username: trimUser, password: hash, description, price})
+    Users.addUser({username: trimUser, password: hash,})
     .then(user => {
         res.status(201).json(user)
     })
@@ -31,7 +35,7 @@ router.post('/register', (req, res, next) => {
 // [POST] log in that user
 router.post('/login', (req, res, next) => {
     const {username} = req.body
-    Users.findBy({username})
+    Users.findUsersBy({username})
     .then(([user]) => {
         const token = tokenBuilder(user)
         const user_id = user.user_id
