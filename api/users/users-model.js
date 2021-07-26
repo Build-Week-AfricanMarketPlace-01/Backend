@@ -1,5 +1,9 @@
 const db = require('../data/db-config')
 
+function findAll() {
+    return db('users').select('user_id', 'username')
+}
+
 function findUsers(user_id) {
     return db('users')
         .select("user_id", "username",)
@@ -25,11 +29,10 @@ function findUsersBy(filter) {
 //         .where('items.item_id', item_id).first()
 // }
 
-// async function addUser(user, user_id) { //fix
-//     const [user_id] = await db('users').insert(user, 'user_id')
-//     await db('users').insert({user_id: user_id, user_id:user_id.user_id})
-//     return db('users').where({user_id}).first()
-// }
+async function addUser(user) { //fix
+    const [user_id] = await db('users').insert(user, 'user_id')
+    return db('users').where({user_id}).first()
+}
 
 
 
@@ -71,9 +74,10 @@ function remove(user_id) {
 }
 
 module.exports = {
+    findAll,
     findUsers,
     findUsersBy,
-    findUsersById,
+    // findUsersById,
     addUser,
     update,
     remove
