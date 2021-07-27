@@ -19,6 +19,22 @@ const checkId = (req, res, next) => {
     })
 }
 
+const confirmItem = (req, res, next) => {
+    const {name, location, price, description} = req.body
+    if(
+        !name || name.trim() === null
+        || !location || location.trim() === null
+        || !price || !description || description.trim() === null
+    ) {
+        res.status(400).json({
+            message: "All items must have name, location, price, and description"
+        })
+    } else {
+        next()
+    }
+}
+
 module.exports = {
-    checkId
+    checkId,
+    confirmItem
 }

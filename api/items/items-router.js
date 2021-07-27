@@ -1,6 +1,6 @@
 const router = require('express').Router()
 const Item = require('./items-model')
-const { checkId } = require('./items-middleware')
+const { checkId, confirmItem } = require('./items-middleware')
 
 // [GET] all items
 router.get('/', (req, res, next) => {
@@ -22,7 +22,7 @@ router.get('/:item_id', checkId, (req, res, next) => {
 })
 
 // [POST] add a new item
-router.post('/user/:user_id', (req, res, next) => {
+router.post('/user/:user_id', confirmItem, (req, res, next) => {
     Item.addItem(req.body, req.params)
     .then(item => {
         res.status(201).json(item)
