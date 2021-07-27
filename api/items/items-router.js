@@ -31,7 +31,7 @@ router.post('/user/:user_id', confirmItem, (req, res, next) => {
 })
 
 // [PUT] edit a certain item info
-router.put('/:item_id', checkId, (req, res, next) => {
+router.put('/:item_id', checkId, confirmItem, (req, res, next) => {
     const {name, location, price, description} = req.body
 
     Item.update(req.params.item_id, {name, location, price, description})

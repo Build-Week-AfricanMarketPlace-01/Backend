@@ -2,7 +2,8 @@ const Item = require('./items-model')
 
 const checkId = (req, res, next) => {
     const id = req.params.item_id
-    Item.findBy(id)
+    Item.findById(id)
+
     .then(item => {
         if(!item) {
             res.status(404).json({
@@ -14,7 +15,8 @@ const checkId = (req, res, next) => {
     })
     .catch(err => {
         res.status(500).json({
-            message: err.message
+            message: err.message,
+            customeMessage: "WHAT"
         })
     })
 }
