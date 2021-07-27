@@ -1,5 +1,6 @@
 exports.up = async (knex) => {
   await knex.schema
+
     .createTable('users', table => {
       table.increments('user_id')
       table.string('username', 200).notNullable().unique()
@@ -12,10 +13,16 @@ exports.up = async (knex) => {
       table.string('location').notNullable()
       table.integer('price').notNullable()
       table.string('description').notNullable()
+      // table.integer('user_id')
+      //   .unsigned()
+      //   .notNullable()
+      //   .references('user_id')
+      //   .inTable('users')
+      //   .onDelete('CASCADE')
     })
 
     .createTable('user_items', table => {
-      table.increments('user_items_id')
+      table.increments('userItems_id')
       table.integer('item_id')
         .unsigned()
         .notNullable()

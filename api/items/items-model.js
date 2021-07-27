@@ -30,7 +30,8 @@ function findById(item_id) {
 
 async function addItem(item, user_id) {
     const [item_id] = await db('items').insert(item, 'item_id')
-    await db('user_items').insert({item_id: item_id, user_id:user_id.user_id})
+    console.log(user_id.user_id)
+    await db('user_items').insert({ item_id:item_id, user_id:user_id.user_id })
     return db('items').where({item_id}).first()
 }
 
