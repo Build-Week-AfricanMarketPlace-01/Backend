@@ -17,6 +17,10 @@ function findUsersBy(filter) {
         .orderBy('user_id')
 }
 
+function findById(user_id) {
+    return db('users').select('user_id', 'username').where({user_id}).first()
+}
+
 // function findUsersById(item_id) { //fix
 //     return db('users')
 //         .leftJoin('user_items', 'items.item_id', 'userItems.item_id')
@@ -77,7 +81,7 @@ module.exports = {
     findAll,
     findUsers,
     findUsersBy,
-    // findUsersById,
+    findById,
     addUser,
     update,
     remove
