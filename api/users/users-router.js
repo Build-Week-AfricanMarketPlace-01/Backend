@@ -50,7 +50,16 @@ router.post('/login', (req, res, next) => {
 
 // [PUT] edit a user
 router.put('/:user_id', restricted, (req, res, next) => {
-    res.json({message: 'edit a user'})
+    // res.json({message: 'edit a user'})
+    const id = req.decodedToken.subject;
+    const user = { username:req.body.username, password:bcrypt.hashSync(req.body.password, 8) }
+    req.body.email ? user.email = req.body.email : {}
+    Accounts.update(id, user)
+    .then(account => {
+        res.status(200).json(account);
+    })
+    .catch(next)
+
 })
 
 // [DELETE] a user
