@@ -24,6 +24,16 @@ router.get('/:user_id', restricted, (req, res, next) => {
     .catch(next)
 })
 
+// [GET] all the users items
+router.get('/:user_id/items', (req, res, next) => {
+    const {user_id} = req.params
+    Users.findById(user_id)
+    .then(user => {
+        res.json(user)
+    })
+    .catch(next)
+})
+
 // [POST] registers a new user
 router.post('/register', (req, res, next) => {
     const {username, password,} = req.body
@@ -54,13 +64,19 @@ router.post('/login', (req, res, next) => {
 })
 
 // [PUT] edit a user
-router.put('/:user_id', restricted, (req, res, next) => {
-    res.json({message: 'edit a user'})
-})
+// router.put('/:user_id', restricted, (req, res, next) => {
+//     res.json({message: 'edit a user'})
+// })
 
 // [DELETE] a user
 router.delete('/:user_id', restricted, (req, res, next) => {
-    res.json({message: 'remove a user'})
+    Users.remove(req.params.user_id)
+    .then(() => {
+        res.status(200).json({
+            message: 'User deleted'
+        })
+    })
+    .catch(next)
 })
 
 // ERROR HANDLING 
