@@ -16,7 +16,12 @@ router.get('/', restricted,(req, res, next) => {
 
 // [GET] a certain user
 router.get('/:user_id', restricted, (req, res, next) => {
-    res.json({message: 'get by id'})
+    const {user_id} = req.params
+    Users.findById(user_id)
+    .then(user => {
+        res.json(user)
+    })
+    .catch(next)
 })
 
 // [POST] registers a new user
